@@ -3,104 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Untitled UI - Home</title>
+    <title>Home – Blogs</title>
     <link rel="stylesheet" href="style.css">
-    </head>
+</head>
 <body>
 
-    <header class="header">
-        <div class="header-container">
-            <div class="logo">Untitled UI</div>
-            
-            <nav class="navbar">
-                <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li class="dropdown">
-                        <a href="#">Productos ⌵</a>
-                        <div class="dropdown-content">
-                            <a href="#">Servicios</a>
-                            <a href="#">Planes</a>
-                        </div>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#">Blog ⌵</a>
-                        <div class="dropdown-content">
-                            <a href="blog-1.html">Blog 1</a>
-                            <a href="blog-2.html">Blog 2</a>
-                        </div>
-                    </li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Visitanos</a></li>
-                </ul>
-            </nav>
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="nav-container">
+        <div class="logo">Untitled UI</div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Home</a></li>
 
-            <div class="auth-buttons">
-                <a href="#" class="btn-login">Log in</a>
-                <a href="#" class="btn-signup">Sign up</a>
-            </div>
+                <li class="dropdown">
+                    <a href="#">Blogs ▾</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="blog-1.html">Introducción a los Grafos</a></li>
+                        <li><a href="http://127.0.0.1:5500/blog2.html">Representación de Grafos</a></li>
+                        <li><a href="blog-3.html">Algoritmos de Recorrido</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+        <div class="auth-buttons">
+            <a href="#" class="login">Log in</a>
+            <a href="#" class="signup">Sign up</a>
         </div>
-    </header>
+    </div>
+</header>
 
-    <main>
-        <section class="hero-banner">
-            <div class="hero-content">
-                <span class="featured-tag">Featured</span>
-                <h1>Bienvenido Nuestro Espacio de Blogs</h1>
-                <h2>Advice from Untitled Founder,</h2>
-                <p>Descubre excelentes historias, tips y novedades en nuestras secciones.</p>
-                <a href="#" class="banner-arrow">→</a>
+<!-- HERO BANNER -->
+<section class="hero">
+    <div class="hero-content">
+        <span class="badge">FEATURED</span>
+        <h1>Bienvenido Nuestro Espacio de Blogs</h1>
+        <h3>Advice from Untitled Founder,</h3>
+        <p>Descubre excelentes historias, tips y novedades en nuestras secciones.</p>
+    </div>
+</section>
+
+<!-- ÚLTIMOS ARTÍCULOS -->
+<section class="articles">
+    <h2>Nuestros Últimos Artículos</h2>
+
+    <div class="articles-grid">
+
+        <!-- Blog 1 -->
+        <a href="blog-1.html" class="card">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=60" alt="">
+            <div class="card-content">
+                <h3>Blog 1: Introducción a los Grafos: Nodos, Aristas y Tipos.</h3>
+                <p>Las últimas tendencias en programación y gadgets.</p>
+                <span class="meta">🟢 Javier C. · 5 Dic 2024</span>
             </div>
-        </section>
+        </a>
 
-        <section class="blogs-section">
-            <h2 class="section-title">Nuestros Últimos Artículos</h2>
-            
-            <div class="grid-container">
-                <article class="blog-card">
-                    <img src="img/close-up-person-working-home-night.jpg" alt="Persona programando" class="blog-image">
-                    <div class="card-text-content">
-                        <h3>Blog 1: Introducción a los Grafos: Nodos, Aristas y Tipos.</h3>
-                        <p class="description">Las últimas tendencias en programación y gadgets.</p>
-                        <div class="card-meta">
-                            <span class="author">🤖 Javier C.</span>
-                            <span class="date"> · 5 Dic 2024</span>
-                        </div>
-                    </div>
-                    <a href="blog-1.html" class="card-link"></a>
-                </article>
-
-                <article class="blog-card">
-                    <img src="placeholder-blog-2.jpg" alt="Persona en laptop" class="blog-image">
-                    <div class="card-text-content">
-                        <h3>Blog 2: Representación de Grafos.</h3>
-                        <p class="description">Platillos sencillos y deliciosos para tu día a día.</p>
-                        <div class="card-meta">
-                            <span class="author">🍳 Ana G.</span>
-                            <span class="date"> · 4 Dic 2024</span>
-                        </div>
-                    </div>
-                    <a href="blog-2.html" class="card-link"></a>
-                </article>
-
-                <article class="blog-card">
-                    <img src="placeholder-blog-3.jpg" alt="Diseño abstracto" class="blog-image">
-                    <div class="card-text-content">
-                        <h3>Blog 3: Algoritmos Fundamentales de Recorrido.</h3>
-                        <p class="description">Guías de destino, consejos y rutas inolvidables.</p>
-                        <div class="card-meta">
-                            <span class="author">✈️ Ever Q.</span>
-                            <span class="date"> · 4 Dic 2024</span>
-                        </div>
-                    </div>
-                    <a href="blog-3.html" class="card-link"></a>
-                </article>
+        <!-- Blog 2 -->
+        <a href="blog-2.html" class="card">
+            <img src="https://images.unsplash.com/photo-1526378722484-c1a0a27cb1c7?auto=format&fit=crop&w=800&q=60" alt="">
+            <div class="card-content">
+                <h3>Blog 2: Representación de Grafos.</h3>
+                <p>Platillos sencillos y deliciosos para tu día a día.</p>
+                <span class="meta">🟣 Ana G. · 4 Dic 2024</span>
             </div>
-        </section>
-    </main>
+        </a>
 
-    <footer>
-        <p>&copy; 2025 Untitled UI Clone</p>
-    </footer>
+        <!-- Blog 3 -->
+        <a href="blog-3.html" class="card">
+            <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&w=800&q=60" alt="">
+            <div class="card-content">
+                <h3>Blog 3: Algoritmos Fundamentales de Recorrido.</h3>
+                <p>Guías de destino, consejos y rutas inolvidables.</p>
+                <span class="meta">🔵 Ever Q. · 4 Dic 2024</span>
+            </div>
+        </a>
+
+    </div>
+</section>
 
 </body>
 </html>
