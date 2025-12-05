@@ -1,35 +1,192 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog 1: Tecnología y Desarrollo</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Algoritmos Fundamentales de Recorrido</title>
+  <style>
+    :root{--bg:#f7f8fb;--card:#ffffff;--accent:#2463eb;--muted:#556;--radius:14px}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;line-height:1.6;background:var(--bg);color:var(--muted);margin:0;padding:32px}
+    .container{max-width:980px;margin:0 auto}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:0 8px 30px rgba(22,30,87,0.06);overflow:hidden}
+    header{display:flex;align-items:center;gap:20px;padding:24px}
+    header img{width:140px;height:100px;object-fit:cover;border-radius:10px;flex-shrink:0}
+    header h1{font-size:clamp(20px,3vw,28px);margin:0;color:#102a43}
+    main{padding:28px}
+    h2{color:#0b2540;margin-top:20px}
+    pre{background:#f0f4ff;padding:12px;border-radius:8px;overflow:auto}
+    ul{margin-top:8px}
+    .example{background:#fbfbff;padding:12px;border-left:4px solid var(--accent);border-radius:8px}
+    footer{padding:20px 28px;background:linear-gradient(90deg, rgba(36,99,235,0.05), rgba(36,99,235,0.02));border-top:1px solid rgba(36,99,235,0.04);border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);color:#234}
+    a.button{display:inline-block;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
+    code{font-family:Consolas, 'Courier New', monospace}
+    @media (max-width:640px){header{flex-direction:column;align-items:flex-start}header img{width:100%;height:auto}}
+  </style>
 </head>
 <body>
+  <div class="container">
+    <div class="card">
+      <header>
+        <!-- Imagen al principio -->
+        <img src="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=1200&q=80" alt="Ilustración: algoritmos de recorrido en grafos" />
+        <div>
+          <h1>Algoritmos Fundamentales de Recorrido</h1>
+          <p style="margin:6px 0 0;color:#415069;">BFS, DFS: cómo funcionan, pseudocódigo, complejidades, variantes y aplicaciones prácticas.</p>
+        </div>
+      </header>
 
-    <header>
-        <nav class="navbar">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="blog-1.html">Blog 1: Tecnología</a></li>
-                <li><a href="blog-2.html">Blog 2: Recetas</a></li>
-                <li><a href="blog-3.html">Blog 3: Viajes</a></li>
-            </ul>
-        </nav>
-    </header>
+      <main>
+        <section>
+          <h2>¿Qué es un recorrido de grafo?</h2>
+          <p>Recorrer un grafo significa visitar sus nodos siguiendo sus aristas de acuerdo a reglas específicas. Los recorridos son la base para resolver problemas como búsqueda, conectividad, detección de ciclos y ordenamientos topológicos.</p>
 
-    <main class="blog-content">
-        <h1>Artículo: El Futuro del Desarrollo Web</h1>
-        <p class="meta">Publicado el 3 de Diciembre de 2025</p>
-        
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-        
-        </main>
+          <div class="example">
+            <strong>Objetivo típico:</strong> visitar todos los nodos alcanzables desde un nodo inicial, procesando (por ejemplo) la distancia mínima o la estructura de componentes conexas.
+          </div>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 Mi Sitio Web de Blogs</p>
-    </footer>
+        <section>
+          <h2>Breadth-First Search (BFS)</h2>
+          <p>BFS explora el grafo por niveles: primero los vecinos directos del nodo inicial, luego los vecinos de esos vecinos, y así sucesivamente. Utiliza una <strong>cola</strong> (FIFO).</p>
 
+          <h3>Pseudocódigo (iterativo)</h3>
+          <pre><code>function BFS(graph, start):
+  create queue Q
+  mark start as visited
+  enqueue start into Q
+  while Q not empty:
+    v = dequeue Q
+    for each neighbor u of v:
+      if u is not visited:
+        mark u as visited
+        enqueue u into Q
+</code></pre>
+
+          <h3>Complejidad</h3>
+          <ul>
+            <li><strong>Tiempo:</strong> O(V + E) con lista de adyacencia.</li>
+            <li><strong>Espacio:</strong> O(V) para la cola y marcas de visitado.</li>
+          </ul>
+
+          <h3>Usos</h3>
+          <ul>
+            <li>Encontrar la distancia mínima (menor número de aristas) en grafos no ponderados.</li>
+            <li>Encontrar componentes conexas en grafos no dirigidos.</li>
+            <li>Algoritmos en grafos bipartitos y nivelación (flow layering).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Depth-First Search (DFS)</h2>
+          <p>DFS explora tan profundamente como sea posible a partir de un nodo, retrocediendo cuando se agotan los caminos. Puede implementarse de forma recursiva o con una pila explícita.</p>
+
+          <h3>Pseudocódigo (recursivo)</h3>
+          <pre><code>function DFS(graph, v):
+  mark v as visited
+  for each neighbor u of v:
+    if u is not visited:
+      DFS(graph, u)
+</code></pre>
+
+          <h3>Complejidad</h3>
+          <ul>
+            <li><strong>Tiempo:</strong> O(V + E) con lista de adyacencia.</li>
+            <li><strong>Espacio:</strong> O(V) en la pila de recursión (o pila explícita).</li>
+          </ul>
+
+          <h3>Usos</h3>
+          <ul>
+            <li>Detección de ciclos en grafos dirigidos y no dirigidos.</li>
+            <li>Ordenamiento topológico (con DFS y pila de salida).</li>
+            <li>Encontrar componentes fuertemente conexas (Kosaraju, Tarjan).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Variantes y técnicas relacionadas</h2>
+          <h3>DFS iterativo</h3>
+          <p>Se puede usar una pila explícita para evitar límites de recursión.</p>
+
+          <h3>BFS en grafos ponderados</h3>
+          <p>BFS sirve para grafos no ponderados. Para grafos con pesos uniformes o pequeños enteros existen variantes (0-1 BFS). Para pesos positivos generales, usar Dijkstra.</p>
+
+          <h3>Recorridos dirigidos vs no dirigidos</h3>
+          <p>En grafos dirigidos, los recorridos respetan la dirección de las aristas; esto cambia la estructura de componentes y la detección de ciclos.</p>
+        </section>
+
+        <section>
+          <h2>Problemas clásicos resueltos con recorridos</h2>
+          <ul>
+            <li><strong>Conectividad:</strong> ¿dos nodos están conectados?</li>
+            <li><strong>Componentes conexas:</strong> contar componentes en grafos no dirigidos (BFS/DFS).</li>
+            <li><strong>Ciclo:</strong> detectar si existe un ciclo (DFS con colores o pila).</li>
+            <li><strong>Distancias mínimas:</strong> BFS para grafos no ponderados; Dijkstra para ponderados.</li>
+            <li><strong>Orden topológico:</strong> DFS + pila de salida para DAGs.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Ejemplos en Python</h2>
+          <pre><code># BFS iterativo (lista de adyacencia)
+def bfs(adj, start):
+    from collections import deque
+    visited = set([start])
+    q = deque([start])
+    order = []
+    while q:
+        v = q.popleft()
+        order.append(v)
+        for u in adj.get(v, []):
+            if u not in visited:
+                visited.add(u)
+                q.append(u)
+    return order
+
+# DFS recursivo
+def dfs(adj, v, visited=None, order=None):
+    if visited is None:
+        visited = set()
+    if order is None:
+        order = []
+    visited.add(v)
+    order.append(v)
+    for u in adj.get(v, []):
+        if u not in visited:
+            dfs(adj, u, visited, order)
+    return order
+</code></pre>
+        </section>
+
+        <section>
+          <h2>Consejos prácticos</h2>
+          <ul>
+            <li>Elige BFS cuando necesites distancias mínimas en grafos no ponderados.</li>
+            <li>Usa DFS para explorar estructuras profundas o cuando necesites orden topológico/ciclos.</li>
+            <li>Controla la profundidad de recursión en grafos muy grandes —usar DFS iterativo si es necesario.</li>
+            <li>Marca los nodos con estados (no visitado, en proceso, terminado) al detectar ciclos en grafos dirigidos.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Conclusión</h2>
+          <p>BFS y DFS son herramientas sencillas pero poderosas. Entender sus diferencias, complejidades y aplicaciones es clave para abordar problemas de grafos eficientemente. Con estas bases puedes avanzar a algoritmos más complejos como Dijkstra, Bellman-Ford, y algoritmos para componentes fuertemente conexas.</p>
+
+          <p>¿Deseas que lo exporte a PDF, añada diagramas SVG que muestren el orden de visita, o incluya ejercicios con soluciones?</p>
+        </section>
+      </main>
+
+      <footer>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <div>
+            <strong>Siguiente paso</strong>
+            <div style="font-size:14px;margin-top:6px">Puedo generar animaciones SVG o código listo para ejecutar en Jupyter.</div>
+          </div>
+          <div>
+            <a class="button" href="#">Volver al inicio</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
 </body>
 </html>

@@ -1,35 +1,199 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog 1: Tecnología y Desarrollo</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Representación de Grafos</title>
+  <style>
+    :root{--bg:#f7f8fb;--card:#ffffff;--accent:#2463eb;--muted:#556;--radius:14px}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;line-height:1.6;background:var(--bg);color:var(--muted);margin:0;padding:32px}
+    .container{max-width:980px;margin:0 auto}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:0 8px 30px rgba(22,30,87,0.06);overflow:hidden}
+    header{display:flex;align-items:center;gap:20px;padding:24px}
+    header img{width:140px;height:100px;object-fit:cover;border-radius:10px;flex-shrink:0}
+    header h1{font-size:clamp(20px,3vw,28px);margin:0;color:#102a43}
+    main{padding:28px}
+    h2{color:#0b2540;margin-top:20px}
+    pre{background:#f0f4ff;padding:12px;border-radius:8px;overflow:auto}
+    ul{margin-top:8px}
+    .example{background:#fbfbff;padding:12px;border-left:4px solid var(--accent);border-radius:8px}
+    footer{padding:20px 28px;background:linear-gradient(90deg, rgba(36,99,235,0.05), rgba(36,99,235,0.02));border-top:1px solid rgba(36,99,235,0.04);border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);color:#234}
+    a.button{display:inline-block;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:8px;border:1px solid #eef3ff;text-align:left}
+    @media (max-width:640px){header{flex-direction:column;align-items:flex-start}header img{width:100%;height:auto}}
+  </style>
 </head>
 <body>
+  <div class="container">
+    <div class="card">
+      <header>
+        <!-- Imagen al principio -->
+        <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80" alt="Ilustración: representación de grafos" />
+        <div>
+          <h1>Representación de Grafos</h1>
+          <p style="margin:6px 0 0;color:#415069;">Cómo almacenar y representar grafos en memoria: listas de adyacencia, matrices, listas de aristas y su uso práctico.</p>
+        </div>
+      </header>
 
-    <header>
-        <nav class="navbar">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="blog-1.html">Blog 1: Tecnología</a></li>
-                <li><a href="blog-2.html">Blog 2: Recetas</a></li>
-                <li><a href="blog-3.html">Blog 3: Viajes</a></li>
-            </ul>
-        </nav>
-    </header>
+      <main>
+        <section>
+          <h2>Introducción</h2>
+          <p>Representar un grafo en memoria es esencial para implementar algoritmos eficientes. La elección de la representación impacta la complejidad temporal y espacial de las operaciones comunes: recorrer vecinos, añadir/eliminar aristas, o calcular grados.</p>
 
-    <main class="blog-content">
-        <h1>Artículo: El Futuro del Desarrollo Web</h1>
-        <p class="meta">Publicado el 3 de Diciembre de 2025</p>
-        
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-        
-        </main>
+          <div class="example">
+            <strong>Escenario:</strong> un grafo con 6 nodos y 8 aristas. ¿Cómo lo guardamos para hacer BFS rápido o para ejecutar Dijkstra? La respuesta depende de la representación.
+          </div>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 Mi Sitio Web de Blogs</p>
-    </footer>
+        <section>
+          <h2>1. Lista de adyacencia</h2>
+          <p>Para cada nodo guardamos una lista (o vector) con sus vecinos. Es la representación más usada en grafos dispersos.</p>
+          <ul>
+            <li><strong>Espacio:</strong> O(V + E)</li>
+            <li><strong>Iterar vecinos:</strong> O(deg(v))</li>
+            <li><strong>Añadir arista:</strong> O(1) amortizado (para estructuras con append)</li>
+          </ul>
 
+          <pre><code>// Ejemplo (pseudo-Python)
+adj = {
+  0: [1, 2],
+  1: [0, 3],
+  2: [0, 3],
+  3: [1, 2, 4],
+  4: [3, 5],
+  5: [4]
+}
+</code></pre>
+        </section>
+
+        <section>
+          <h2>2. Matriz de adyacencia</h2>
+          <p>Una matriz <code>n × n</code> donde la celda (i, j) indica la existencia (o peso) de la arista entre i y j. Muy útil en grafos densos o cuando las consultas "¿i y j están conectados?" son frecuentes.</p>
+          <ul>
+            <li><strong>Espacio:</strong> O(V²)</li>
+            <li><strong>Comprobar arista:</strong> O(1)</li>
+            <li><strong>Iterar vecinos:</strong> O(V)</li>
+          </ul>
+
+          <pre><code>// Matriz de adyacencia (0/1)
+adj_matrix = [
+  [0,1,1,0,0,0],
+  [1,0,0,1,0,0],
+  [1,0,0,1,0,0],
+  [0,1,1,0,1,0],
+  [0,0,0,1,0,1],
+  [0,0,0,0,1,0]
+]
+</code></pre>
+        </section>
+
+        <section>
+          <h2>3. Lista de aristas (edge list)</h2>
+          <p>Un arreglo de pares (u, v) que representan cada arista. Muy útil para algoritmos que procesan aristas (ej.: Kruskal) o para leer grafos desde archivos.</p>
+          <ul>
+            <li><strong>Espacio:</strong> O(E)</li>
+            <li><strong>Iterar aristas:</strong> O(E)</li>
+            <li><strong>Comprobar existencia:</strong> O(E) —costoso sin índice adicional</li>
+          </ul>
+
+          <pre><code>edges = [(0,1),(0,2),(1,3),(2,3),(3,4),(4,5)]
+</code></pre>
+        </section>
+
+        <section>
+          <h2>4. Matriz de incidencia</h2>
+          <p>Una matriz <code>V × E</code> que indica qué nodos inciden en qué aristas. Es menos común, pero útil en teoría de grafos y problemas lineales.</p>
+          <ul>
+            <li><strong>Espacio:</strong> O(V × E)</li>
+            <li>Buena para representar relaciones nodo-arista y para grafos con estructuras especiales.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Comparación y cuándo usar cada una</h2>
+          <table>
+            <thead>
+              <tr><th>Representación</th><th>Ventajas</th><th>Desventajas</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Lista de adyacencia</td><td>Eficiente en espacio para grafos dispersos; iterar vecinos rápido</td><td>Comprobar conexión i–j es O(deg(i))</td></tr>
+              <tr><td>Matriz de adyacencia</td><td>Consulta de existencia O(1); simple para grafos pequeños</td><td>Muy costosa en espacio si V grande (O(V²))</td></tr>
+              <tr><td>Lista de aristas</td><td>Sencilla; ideal para algoritmos basados en aristas</td><td>Comprobar existencia costoso; no eficiente para explorar vecinos</td></tr>
+              <tr><td>Matriz de incidencia</td><td>Buena para manipulación algebraica y problemas especializados</td><td>Espacio O(V×E); poco práctica para grandes</td></tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section>
+          <h2>Representaciones para grafos con pesos y dirigidos</h2>
+          <p>En grafos dirigidos se guardan las aristas con sentido (u → v). En estructuras con pesos, en lugar de almacenar solo el vértice vecino se almacena la tupla (v, peso).</p>
+
+          <pre><code>// Lista de adyacencia con pesos
+adj = {
+  0: [(1, 10), (2, 5)],
+  1: [(3, 2)],
+  2: [(3, 3)],
+  3: [(4, 1)],
+  4: [(5, 4)],
+  5: []
+}
+</code></pre>
+        </section>
+
+        <section>
+          <h2>Operaciones y complejidades comunes</h2>
+          <ul>
+            <li><strong>Recorrer todos los nodos:</strong> O(V + E) con lista de adyacencia.</li>
+            <li><strong>Encontrar si existe arista (u,v):</strong> O(1) con matriz, O(deg(u)) con lista de adyacencia.</li>
+            <li><strong>Añadir arista:</strong> O(1) en lista de adyacencia; O(1) en matriz (pero costoso en espacio).</li>
+            <li><strong>Eliminar arista:</strong> O(deg(u)) en lista; O(1) en matriz (marcar 0).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Ejemplo práctico en Python (NetworkX)</h2>
+          <pre><code>import networkx as nx
+
+G = nx.Graph()
+G.add_weighted_edges_from([(0,1,10),(0,2,5),(1,3,2),(2,3,3),(3,4,1),(4,5,4)])
+
+# Lista de adyacencia
+for n, nbrs in G.adj.items():
+    print(n, list(nbrs.items()))
+</code></pre>
+        </section>
+
+        <section>
+          <h2>Buenas prácticas</h2>
+          <ul>
+            <li>Usar <strong>lista de adyacencia</strong> para grafos dispersos (E &lt;&lt; V²).</li>
+            <li>Preferir <strong>matriz</strong> para grafos densos o cuando V es pequeño.</li>
+            <li>Si se realizan muchas consultas de existencia, mantener un índice (set) por nodo para O(1) en listas de adyacencia.</li>
+            <li>En sistemas reales (bases de datos de grafos) considerar formatos comprimidos o bases especializadas (ej.: Neo4j, JanusGraph).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Conclusión</h2>
+          <p>La representación adecuada de un grafo depende del problema y del patrón de operaciones que se realicen. Entender las ventajas y limitaciones de cada estructura permite elegir la implementación que balancee mejor tiempo y espacio.</p>
+
+          <p>¿Quieres que convierta esto en un PDF, añada diagramas SVG interactivos o incluya casos prácticos con archivos de entrada?</p>
+        </section>
+      </main>
+
+      <footer>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+          <div>
+            <strong>Próximo paso</strong>
+            <div style="font-size:14px;margin-top:6px">Puedo generar ejemplos visuales o código listo para ejecutar.</div>
+          </div>
+          <div>
+            <a class="button" href="#">Volver al Inicio</a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  </div>
 </body>
 </html>

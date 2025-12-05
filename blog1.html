@@ -1,35 +1,132 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog 1: Tecnología y Desarrollo</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Introducción a los Grafos: Nodos, Aristas y Tipos</title>
+  <style>
+    :root{--bg:#f7f8fb;--card:#ffffff;--accent:#2463eb;--muted:#556;--radius:14px}
+    body{font-family:Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;line-height:1.6;background:var(--bg);color:var(--muted);margin:0;padding:32px}
+    .container{max-width:980px;margin:0 auto}
+    .card{background:var(--card);border-radius:var(--radius);box-shadow:0 8px 30px rgba(22,30,87,0.06);overflow:hidden}
+    header{display:flex;align-items:center;gap:20px;padding:24px}
+    header img{width:140px;height:100px;object-fit:cover;border-radius:10px;flex-shrink:0}
+    header h1{font-size:clamp(20px,3vw,28px);margin:0;color:#102a43}
+    main{padding:28px}
+    h2{color:#0b2540;margin-top:20px}
+    pre{background:#f0f4ff;padding:12px;border-radius:8px;overflow:auto}
+    ul{margin-top:8px}
+    .example{background:#fbfbff;padding:12px;border-left:4px solid var(--accent);border-radius:8px}
+    footer{padding:20px 28px;background:linear-gradient(90deg, rgba(36,99,235,0.05), rgba(36,99,235,0.02));border-top:1px solid rgba(36,99,235,0.04);border-bottom-left-radius:var(--radius);border-bottom-right-radius:var(--radius);color:#234}
+    a.button{display:inline-block;padding:10px 14px;background:var(--accent);color:#fff;border-radius:10px;text-decoration:none;font-weight:600}
+    @media (max-width:640px){header{flex-direction:column;align-items:flex-start}header img{width:100%;height:auto}}
+  </style>
 </head>
 <body>
+  <div class="container">
+    <div class="card">
+      <header>
+        <!-- Imagen al principio -->
+        <img src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?auto=format&fit=crop&w=1200&q=80" alt="Ilustración de grafos: nodos y aristas" />
+        <div>
+          <h1>Introducción a los Grafos: Nodos, Aristas y Tipos</h1>
+          <p style="margin:6px 0 0;color:#415069;">Un artículo claro y didáctico sobre los conceptos básicos de grafos, sus componentes y las clasificaciones más usadas.</p>
+        </div>
+      </header>
 
-    <header>
-        <nav class="navbar">
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="blog-1.html">Blog 1: Tecnología</a></li>
-                <li><a href="blog-2.html">Blog 2: Recetas</a></li>
-                <li><a href="blog-3.html">Blog 3: Viajes</a></li>
-            </ul>
-        </nav>
-    </header>
+      <main>
+        <section>
+          <h2>¿Qué es un Grafo?</h2>
+          <p>Un <strong>grafo</strong> es una estructura compuesta por <em>nodos</em> (o vértices) y <em>aristas</em> (o edges) que modela relaciones entre entidades. Formalmente se representa como <code>G = (V, E)</code>, donde <code>V</code> es el conjunto de nodos y <code>E</code> el conjunto de aristas.</p>
 
-    <main class="blog-content">
-        <h1>Artículo: El Futuro del Desarrollo Web</h1>
-        <p class="meta">Publicado el 3 de Diciembre de 2025</p>
-        
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua...</p>
-        
-        </main>
+          <div class="example">
+            <strong>Ejemplo sencillo:</strong> Imagina tres ciudades: Bogotá, Medellín y Cali. Cada ciudad es un nodo y cada carretera es una arista que conecta dos nodos.
+          </div>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 Mi Sitio Web de Blogs</p>
-    </footer>
+        <section>
+          <h2>Nodos</h2>
+          <p>Los <strong>nodos</strong> representan las entidades del grafo. Pueden tener:</p>
+          <ul>
+            <li><strong>Etiqueta</strong> (ej. nombre del usuario o identificador).</li>
+            <li><strong>Peso</strong> (un valor numérico que expresa importancia o costo).</li>
+            <li><strong>Grado</strong>: número de aristas que inciden en el nodo.</li>
+          </ul>
+        </section>
 
+        <section>
+          <h2>Aristas</h2>
+          <p>Las <strong>aristas</strong> modelan relaciones entre nodos. Se clasifican principalmente en:</p>
+          <ul>
+            <li><strong>No dirigidas</strong>: la relación es bidireccional (A — B).</li>
+            <li><strong>Dirigidas</strong>: la relación tiene dirección (A → B).</li>
+            <li><strong>Ponderadas</strong>: llevan un valor asociado (distancia, costo, tiempo).</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Tipos de grafos</h2>
+          <p>A continuación, los tipos más comunes y sus usos:</p>
+
+          <h3>Grafo No Dirigido</h3>
+          <p>Las conexiones no tienen dirección (ej.: redes de amistad).</p>
+
+          <h3>Grafo Dirigido (Digrafo)</h3>
+          <p>Las aristas tienen dirección (ej.: seguidores en una red social).</p>
+
+          <h3>Grafo Ponderado</h3>
+          <p>Las aristas incluyen pesos (ej.: mapas con distancias).</p>
+
+          <h3>Grafo Completo</h3>
+          <p>Todos los nodos están conectados entre sí. Si hay <code>n</code> nodos, el número de aristas es <code>n(n-1)/2</code> (en grafos no dirigidos completos).</p>
+
+          <h3>Grafos Cíclicos y Acíclicos</h3>
+          <p>Un grafo cíclico contiene al menos un ciclo (camino que regresa al punto inicial). Si no tiene ciclos y es dirigido, se denomina <strong>DAG</strong> (Directed Acyclic Graph), útil para dependencias y planificación.</p>
+
+          <h3>Bipartito</h3>
+          <p>Los nodos se dividen en dos conjuntos y las aristas sólo conectan nodos de conjuntos distintos (ej.: usuarios ↔ productos en sistemas de recomendación).</p>
+
+          <h3>Árbol (Tree)</h3>
+          <p>Un árbol es un grafo conexo, acíclico y no dirigido donde existe exactamente un único camino entre cualquier par de nodos. Se usa en jerarquías y estructuras de datos.</p>
+        </section>
+
+        <section>
+          <h2>Aplicaciones y algoritmos clave</h2>
+          <p>Los grafos tienen aplicaciones en muchas áreas. Algunos algoritmos fundamentales son:</p>
+          <ul>
+            <li><strong>BFS / DFS</strong>: recorridos para explorar grafos.</li>
+            <li><strong>Dijkstra</strong>: rutas más cortas en grafos ponderados (con aristas no negativas).</li>
+            <li><strong>Kruskal / Prim</strong>: árbol de expansión mínima.</li>
+            <li><strong>PageRank</strong>: ranking de páginas web según enlaces entrantes.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Conclusión</h2>
+          <p>Comprender nodos, aristas y los distintos tipos de grafos es la base para estudiar algoritmos más avanzados y aplicar grafos en problemas reales —desde mapas y logística hasta sistemas de recomendación y análisis de redes sociales.</p>
+
+          <p>Si quieres, puedo:</p>
+          <ul>
+            <li>Generar diagramas SVG para ilustrar ejemplos.</li>
+            <li>Crear ejercicios con soluciones paso a paso.</li>
+            <li>Convertir esto en una presentación o PDF.</li>
+          </ul>
+        </section>
+      </main>
+
+      <footer>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+            <div>
+            <strong>Próximo paso</strong>
+            <div style="font-size:14px;margin-top:6px">Puedo generar ejemplos visuales o código listo para ejecutar.</div>
+          </div>
+          <div>
+            <a class="button" href="#">Volver al Inicio</a>
+          </div>
+        </div>
+        </div>
+      </footer>
+    </div>
+  </div>
 </body>
 </html>
