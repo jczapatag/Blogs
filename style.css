@@ -66,19 +66,23 @@ pre {
     z-index: 1000;
 }
 
+/* Sección 2. NAVBAR & HEADER */
 .nav-container {
     width: 92%;
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    /* QUITAMOS space-between o lo cambiamos a flex-start */
+    justify-content: flex-start; /* CRÍTICO: Esto agrupa los elementos a la izquierda */
     align-items: center;
+    /* Nota: Usar 'flex-start' en .nav-container no siempre es ideal para el diseño */
 }
 
 .logo {
     font-size: 1.2rem;
     font-weight: 700;
     color: #111827;
+    margin-right: 100px;
 }
 
 .nav-links {
@@ -167,7 +171,7 @@ pre {
 /* --------------------------------------------------------------------------------------- */
 
 .hero {
-    background: url('https://images.unsplash.com/photo-1550592704-6c36ce8b25df?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat; 
+    background: url('img/close-up-person-working-home-night.jpg') center/cover no-repeat; 
     height: 450px; 
     display: flex;
     align-items: center;
